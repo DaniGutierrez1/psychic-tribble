@@ -8,59 +8,8 @@ let total=0
 
 const SERVICIO=12000
 
-//Que la funcion sea si es un auto o moto...si es moto no hay seguro
+let ingreso=prompt("Desea solicitar asesoria para su seguro?SI o NO?")
 
-ingreso=prompt("Desea solicitar asesoria para su seguro?SI o NO?")
-
-//asdasd
-
-
-function mostrarAutos(autos){
-    autos.forEach(auto => {
-        console.log(auto)
-        
-        
-    });
-}
-
-
-function filtrarMarca(auto){
-    if (datosBusqueda.marca){
-        return auto.marca === datosBusqueda.marca
-    }
-    return auto;
-}
-
-function filtrarModelo(auto){
-    if (datosBusqueda.Modelo){
-        return auto.modelo === datosBusqueda.modelo
-    }
-    return auto;
-}
-
-function filtrarAño(auto){
-    if (datosBusqueda.año){
-        return auto.año === datosBusqueda.año
-    }
-    return auto;
-}
-
-function filtrarPrecio(auto){
-    if(datosBusqueda.precio){
-        return auto.precio === datosBusqueda.precio
-    }
-    return auto;
-}
-
-function filtrarAuto(){
-    let resultado = autos.filter(filtrarMarca).filter(filtrarModelo).filter(filtrarAño).filter(filtrarPrecio);
-    
-    if (resultado.length){
-        mostrarAutos(resultado)
-        
-    }
-
-}
 
 
 /* function categoria(valorVehiculo){
@@ -71,33 +20,39 @@ function filtrarAuto(){
 while (ingreso == "SI"){
     seguros+=1;
 
-    mostrarAutos(autos)
+    const lista = []
 
+    do{
+        let auto ={};
+        let marca = prompt("Marca de su vehiculo")
+        auto.marca= marca
+        
+        let modelo = prompt ("Modelo")
+        auto.modelo = modelo
+        
+        let año = Number (prompt ("Año de su vehiculo")) 
+        auto.año = año
+
+        let precio = Number(prompt("Valor aproximado"))
+        auto.precio = precio
+        
+        lista.push(auto)
+
+        
+        
+    }while (lista.length != 1)
 
     
-    let marca = prompt("Seleccione la marca de su vehiculo")
     
-    let modelo = prompt ("Seleccione el modelo")
+    console.log(lista)
+    filtrarPrecio(lista)
     
-    let año = Number (prompt ("Seleccione el año de su vehiculo")) 
-    
-    
-    const datosBusqueda = {
-        marca: marca ,
-        modelo: modelo,
-        año: año ,
-        precio: ''    
-    }
-    
-
-    filtrarAuto()
-    // valorVehiculo=Number(prompt("Ingrese el valor aproximado de su vehiculo"));
-
-    if (auto.precio < 500000){
-        categoria=auto.precio*0.01
+    if (lista.precio < 500000){
+        categoria=lista.precio*0.01
         let seguroTotal = prompt("Quisiera que su seguro sea contra todo riesgo? SI o NO?")
+
         if (seguroTotal=="SI") {
-            seguroContraTodo=auto.precio*0.015
+            seguroContraTodo=lista.precio*0.015
             totalSeguro=seguroContraTodo + categoria + SERVICIO
             console.log(totalSeguro)
             total=totalSeguro
@@ -108,12 +63,12 @@ while (ingreso == "SI"){
             total=totalSeguro
         }
 
-    }else if(datosBusqueda.precio >500000){
-        categoria=datosBusqueda.precio*0.02
+    }else if(lista.precio >500000){
+        categoria=lista.precio*0.02
         let seguroTotal = prompt("Quisiera que su seguro sea contra todo riesgo? SI o NO?")
         
         if (seguroTotal=="SI") {
-            seguroContraTodo=valorVehiculo*0.018
+            seguroContraTodo=lista.precio *0.018
             totalSeguro=seguroContraTodo + categoria + SERVICIO
             console.log(totalSeguro)
             total=totalSeguro
@@ -125,12 +80,12 @@ while (ingreso == "SI"){
             total=totalSeguro
         }
 
-    }else if(datosBusqueda.precio>1000000){
+    }else if(lista.precio>1000000){
         let seguroTotal = prompt("Quisiera que su seguro sea contra todo riesgo? SI o NO?")
-        categoria=valorVehiculo*0.3
+        categoria=datosBusqueda.precio*0.3
 
         if (seguroTotal=="SI") {
-            seguroContraTodo=valorVehiculo*0.025
+            seguroContraTodo=lista.precio*0.025
             totalSeguro=seguroContraTodo + categoria + SERVICIO
             console.log(totalSeguro)
             total=totalSeguro
@@ -163,4 +118,15 @@ while (ingreso == "SI"){
 if(ingreso =="NO"){
     document.write("Esperamos vuelva pronto")
 }
+
+function filtrarPrecio(lista){
+    if(auto.precio){
+        return lista.precio === auto.precio
+    }
+}
+
+
+function filtarAuto(){
+    let resultado = lista.filter(filtrarPrecio);
+} 
 
