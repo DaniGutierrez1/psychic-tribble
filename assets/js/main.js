@@ -12,7 +12,7 @@ const SERVICIO=12000
 
 ingreso=prompt("Desea solicitar asesoria para su seguro?SI o NO?")
 
-
+//asdasd
 
 
 function mostrarAutos(autos){
